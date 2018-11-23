@@ -169,7 +169,7 @@ TRENCH_AUTH = {
         'email': {
             'VERBOSE_NAME': 'email',
             'VALIDITY_PERIOD': 60 * 10,
-            'HANDLER': '',
+            'HANDLER': 'testapp.backends.basic_email.BasicEmailBackend',
             'SOURCE_FIELD': 'email',
         },
     }
