@@ -138,7 +138,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        ##'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
@@ -165,37 +165,6 @@ TRENCH_AUTH = {
     'CONFIRM_DISABLE_WITH_CODE': True,
     'CONFIRM_BACKUP_CODES_REGENERATION_WITH_CODE': True,
     'BACKUP_CODES_CHARACTERS': '0123456789',
-    'MFA_METHODS': {
-        'sms': {
-            'VERBOSE_NAME': 'sms',
-            'VALIDITY_PERIOD': 60 * 10,
-            'HANDLER': 'trench.backends.twilio.TwilioBackend',
-            'SOURCE_FIELD': 'phone_number',
-            'TWILIO_ACCOUNT_SID': env(
-                'TWILIO_ACCOUNT_SID',
-                default=''
-            ),
-            'TWILIO_AUTH_TOKEN': env(
-                'TWILIO_AUTH_TOKEN',
-                default=''
-            ),
-            'TWILIO_VERIFIED_FROM_NUMBER': env(
-                'TWILIO_VERIFIED_FROM_NUMBER',
-                default='',
-            ),
-        },
-        'email': {
-            'VERBOSE_NAME': 'email',
-            'VALIDITY_PERIOD': 60 * 10,
-            'HANDLER': 'trench.backends.templated_mail.TemplatedMailBackend',
-            'SOURCE_FIELD': 'email',
-        },
-        'app': {
-            'VERBOSE_NAME': 'app',
-            'VALIDITY_PERIOD': 60 * 10,
-            'USES_THIRD_PARTY_CLIENT': True,
-            'HANDLER': 'trench.backends.application.ApplicationBackend',
-        }
-    }
+    'MFA_METHODS': {}
 
 }

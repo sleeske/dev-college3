@@ -120,12 +120,13 @@ class ProtectedActionSerializer(serializers.Serializer):
     )
 
     default_error_messages = {
+        'code_not_provided': _('This action requires code confirmation.'),
         'code_invalid_or_expired': _('Code invalid or expired.'),
     }
 
-    def validate_code(self, value):
-        if not self.requires_mfa_code:
-            return value  # pragma: no cover
+    def _validate_code(self, value):
+        if not value:
+            self.fail('code_not_provided')
 
         obj = self.context['obj']
         validity_period = (
@@ -140,6 +141,11 @@ class ProtectedActionSerializer(serializers.Serializer):
             return value
 
         self.fail('code_invalid_or_expired')
+
+    def validate(self, data):
+        if self.requires_mfa_code:
+            self._validate_code(data.get('code'))
+        return super().validate(data)
 
 
 class RequestMFAMethodActivationConfirmSerializer(ProtectedActionSerializer):

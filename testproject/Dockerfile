@@ -3,7 +3,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apk update
 
-RUN mkdir /code
 WORKDIR /code
 
 ADD ./testproject/requirements/common.txt /code/
@@ -17,3 +16,6 @@ RUN pip install -r default.txt
 RUN pip install -e /trench
 
 ADD ./testproject /code/
+
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT [ "/code/entrypoint.sh" ]
