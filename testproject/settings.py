@@ -165,6 +165,14 @@ TRENCH_AUTH = {
     'CONFIRM_DISABLE_WITH_CODE': True,
     'CONFIRM_BACKUP_CODES_REGENERATION_WITH_CODE': True,
     'BACKUP_CODES_CHARACTERS': '0123456789',
-    'MFA_METHODS': {}
-
+    'MFA_METHODS': {
+        'email': {
+            'VERBOSE_NAME': 'email',
+            'VALIDITY_PERIOD': 60 * 10,
+            'HANDLER': '',
+            'SOURCE_FIELD': 'email',
+        },
+    }
 }
+
+DEFAULT_FROM_EMAIL = 'no-reply@django-trench.com'
